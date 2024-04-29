@@ -124,6 +124,11 @@ const FileUpload: React.FC = () => {
                             </Typography>)}
                         </Box>
                     </Box>
+                    <Typography variant="body2" color="textSecondary" sx={{ marginTop: 2, textAlign: 'center' }}>
+                        <a href="https://github.com/jupgomezme/shepherd_backend_test" target="_blank" rel="noopener noreferrer">
+                            View source code on GitHub
+                        </a>
+                    </Typography>
                 </Paper>
             </Box>
 
