@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  background-color: #fbfafa;
+  background-image: url("jigsaw.svg");
+  background-repeat: repeat;
+  opacity: 1;
+  background-blend-mode: overlay;
+}

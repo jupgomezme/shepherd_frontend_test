@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import { CloudUpload, Download } from '@mui/icons-material'
 import { Snackbar, Alert, CircularProgress } from '@mui/material'
 
@@ -9,8 +9,6 @@ const FileUpload: React.FC = () => {
     const [alertOpen, setAlertOpen] = useState<boolean>(false)
     const [alertMessage, setAlertMessage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
-
-
 
     const endpoint = 'https://ng6zxnwl5xa6n3vhm2bbcv46tu0yvhii.lambda-url.us-east-1.on.aws'
 
@@ -82,37 +80,51 @@ const FileUpload: React.FC = () => {
 
     return (
         <>
-            <Box sx={{ textAlign: 'center', padding: 4 }}>
-                {loading ? (
-                    <CircularProgress />
-                ) : outputLink ? (
-                    <Box sx={{ marginTop: 2 }}>
-                        <Button
-                            variant="contained"
-                            color="success"
-                            startIcon={<Download />}
-                            href={outputLink}
-                            target="_blank"
-                            onClick={() => setOutputLink(null)}
-                        >
-                            Download Output File
-                        </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Paper elevation={3} sx={{ padding: 4, textAlign: 'center', maxWidth: 400 }}>
+                    <Typography variant="h5" gutterBottom>
+                        {outputLink ? 'Your file is ready!' : 'Upload your CSV file'}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" gutterBottom>
+                        {outputLink ? 'Download your normalized file' : 'We will normalize company names in your patent data'}
+                    </Typography>
+                    <Box sx={{ marginY: 2, border: '2px dashed #ccc', padding: 3 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            {loading ? (
+                                <CircularProgress />
+                            ) : outputLink ? (
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    startIcon={<Download />}
+                                    href={outputLink}
+                                    target="_blank"
+                                    onClick={() => setOutputLink(null)}
+                                >
+                                    Download
+                                </Button>
+                            ) : (
+                                <Button
+                                    variant="contained"
+                                    component="label"
+                                    startIcon={<CloudUpload />}
+                                >
+                                    Upload File
+                                    <input
+                                        type="file"
+                                        accept=".csv"
+                                        hidden
+                                        onChange={handleFileChange}
+                                    />
+                                </Button>
+                            )}
+                            {!outputLink && (<Typography variant="caption" color="textSecondary" sx={{ marginTop: 2, textAlign: 'center' }}>
+                                *Only CSV files are accepted <br />
+                                <strong>Format:</strong> patent_id, organization, city, country.
+                            </Typography>)}
+                        </Box>
                     </Box>
-                ) : (
-                    <Button
-                        variant="contained"
-                        component="label"
-                        startIcon={<CloudUpload />}
-                    >
-                        Upload File
-                        <input
-                            type="file"
-                            accept=".csv"
-                            hidden
-                            onChange={handleFileChange}
-                        />
-                    </Button>
-                )}
+                </Paper>
             </Box>
 
             <Snackbar
