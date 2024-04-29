@@ -120,7 +120,7 @@ const FileUpload: React.FC = () => {
                             )}
                             {!outputLink && (<Typography variant="caption" color="textSecondary" sx={{ marginTop: 2, textAlign: 'center' }}>
                                 *Only CSV files are accepted <br />
-                                <strong>Format:</strong> patent_id, organization, city, country.
+                                <strong>Format:</strong> patent_id, organization, city, country
                             </Typography>)}
                         </Box>
                     </Box>
